@@ -18,7 +18,15 @@ router.get('/', async (req, res) => {
 		res.status(500).send('Server Error');
 	}
 });
+router.get('/:id', async(req,res)=>{
+	const post = await Contact.findById(req.params.id);
 
+  if (post) {
+    res.json(post);
+  } else {
+    res.status(404).json({ message: error.message });
+  }
+})
 // @route    POST api/contacts
 // @desc     Create a contact
 // @access   Private
@@ -54,7 +62,7 @@ router.post(
 // @route    PUT api/contacts/:id
 // @desc     Update a contact
 // @access   Private
-router.get('/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty())
 		return res.status(400).json({ errors: errors.array() });
