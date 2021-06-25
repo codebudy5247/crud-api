@@ -54,7 +54,7 @@ router.post(
 // @route    PUT api/contacts/:id
 // @desc     Update a contact
 // @access   Private
-router.put('/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty())
 		return res.status(400).json({ errors: errors.array() });
